@@ -1,4 +1,10 @@
-
+-/*!
+- * Creative Text Boxes 1.2
+- * http://creativetextboxes.com/
+- * Copyright 2011, Ivan Castellanos
+- * Dual licensed under the MIT or GPL Version 2 licenses.
+- * Date: Thu Aug 16 00:00:00 2011 -0400
+- */
 
 (function(){
 
