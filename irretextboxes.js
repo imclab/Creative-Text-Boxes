@@ -1,10 +1,4 @@
-/*!
- * Creative Text Boxes 1.2
- * http://creativetextboxes.com/
- * Copyright 2011, Ivan Castellanos
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * Date: Thu Aug 16 00:00:00 2011 -0400
- */
+
 
 (function(){
 
@@ -65,8 +59,8 @@ window.CreativeTextBox = function(options){
 		currentRegexMatch,
 		alreadyFixed = false,
 		whitespaces_positions = [],
-		previousWhitespaceUsed = 0, 	//	[CACHE] Use the last whitespace used to start from there and not from beginning of text
-		previousLineModificated = 0, 	//	[CACHE] Use the last line modificated to start from there and not from beginning of text
+		previousWhitespaceUsed = 0, 	//	[LIKE CACHE] Use the last whitespace used to start from there and not from beginning of text
+		previousLineModificated = 0, 	//	[LIKE CACHE] Use the last line modificated to start from there and not from beginning of text
 		pixelDistance = options.pixelDistance || 40,
 		HTMLlocator = '<span id="HTMLlocator" style="position:absolute; background:red" >.</span>',
 		lineOffset = options.line || 0;
@@ -90,10 +84,10 @@ window.CreativeTextBox = function(options){
 	for(var j=0; j<sizes.length;j++){
 		options.line = j + lineOffset;
 		var loc = document.getElementById("HTMLlocator");
+		
 		if (loc){
 			loc.parentNode.removeChild(loc);	
 			break;
-			
 		}
 		
 		// [CH5]: This is only done once (for every call of creativeTextBox)
@@ -146,16 +140,21 @@ window.CreativeTextBox = function(options){
 		while(i<whitespaces_positions.length){
 			
 			
-			
 			container.innerHTML = 	html.substring(0,whitespaces_positions[i]) 
 									+ HTMLlocator 
 									+ html.substring(whitespaces_positions[i]);								
 									
 			var loc = document.getElementById("HTMLlocator");
+			
+			
 					
 			if(loc){
-				var offsetTop =  loc.offsetTop;
+
+				var offsetTop =  loc.offsetTop,
+					containerPosition = !ie ? window.getComputedStyle(options.text).getPropertyValue("position") : options.text.currentStyle.position; 
 			} else {
+				
+				
 				return false;				
 			}
 			if(previousOffset != offsetTop){
@@ -164,9 +163,11 @@ window.CreativeTextBox = function(options){
 					previousWhitespaceUsed = i;
 					previousLineModificated = line;	
 					
+					
+					
 					var start_from_end = whitespaces_positions[i],
 						realWidth,
-						parentOffset = options.text.offsetTop,
+						parentOffset = containerPosition=="relative" ? options.text.offsetTop : 0,
 						widthIndex = ((offsetTop-parentOffset)  /pixelDistance)-lineOffset,
 						roundedDown = Math.floor(widthIndex),
 						decimals = widthIndex - roundedDown,
@@ -201,7 +202,6 @@ window.CreativeTextBox = function(options){
 							span.replace(/right/gi,"left");
 					}			
 					
-					/*
 					// [CH9] IE 7 puts the floating element in the line after the required, fixing issue.
 					if(ie<8){
 						var lengthPreviousWord = 0;
@@ -212,10 +212,12 @@ window.CreativeTextBox = function(options){
 						start_from_end -= lengthPreviousWord;								
 					}
 					// [/CH9]
-					*/
+					
+
 					
 									
-					if(typeof realWidth != "undefined" || typeof realWidthOtherSide != "undefined" ){					
+					if(typeof realWidth != "undefined" || typeof realWidthOtherSide != "undefined" ){		
+					
 						container.innerHTML = 	html.substring(0,start_from_end) 
 												+ span 
 												+ html.substring(start_from_end);
@@ -225,6 +227,7 @@ window.CreativeTextBox = function(options){
 							whitespaces_positions[i] = whitespaces_positions[i] + newCharsOffset;
 						}
 					}
+					
 					break;				
 				}
 				
@@ -232,7 +235,10 @@ window.CreativeTextBox = function(options){
 			}
 			prev_html = container.innerHTML;
 			
-			i++;			
+			i++;	
+			if(i==whitespaces_positions.length){	
+				loc.parentNode.removeChild(loc)
+			}
 		}//[CH10]
 	}// [/CH4]
 } // [/CH3]
