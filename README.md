@@ -1,4 +1,4 @@
-[CreativeTextBoxes](http://creativetextboxes.com/) - Irregular Shaped Text in HTML
+[Irregular Shaped Text in HTML](http://creativetextboxes.com/)
 ==================================================
 
 A javascript function to create the illusion of irregular shaped textboxes; it adds transparent HTML elements to create any shape.
