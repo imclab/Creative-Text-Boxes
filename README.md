@@ -3,7 +3,9 @@
 
 A javascript function to create the illusion of irregular shaped textboxes; it adds transparent HTML elements to create any shape.
 
-Example:
+Example: http://creativetextboxes.com/examples.php?shape=guitar
+
+Code example:
 
 CreativeTextBox({
 	text:document.getElementById("text"),
@@ -15,4 +17,3 @@ For more info go to http://creativetextboxes.com/
 
 The graphic tool is free access now : http://creativetextboxes.com/graphic_tool.php
 
-With the graphic tool is easy to create complex shapes like this one: http://creativetextboxes.com/examples.php?shape=guitar
