@@ -1,13 +1,11 @@
-[IrregularTextBox](http://javascriptisawesome.blogspot.com/) - Irregular Shaped Text in HTML
+[Irregular Shaped Text in HTML](http://creativetextboxes.com/)
 ==================================================
 
 A javascript function to create the illusion of irregular shaped textboxes; it adds transparent HTML elements to create any shape.
 
-Example:
+Example: http://creativetextboxes.com/examples.php?shape=guitar
 
-irregularTextBox({
-	text:document.getElementById("text"),
-	line:5,
-	sizes:[1,20,80,106,130,136,140,136,130,106,80,20,1],
-	doble:true
-})
+Documentation at http://creativetextboxes.com/documentation.php
+
+The graphic tool is free access now : http://creativetextboxes.com/graphic_tool.php
+
