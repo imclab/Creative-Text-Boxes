@@ -54,6 +54,7 @@ var ie = (function(){
 
 
 
+
 //[CH3]: Main function (& only public one)
 window.CreativeTextBox = function(options){
 	
