@@ -1,4 +1,4 @@
--/*!
+/*!
 - * Creative Text Boxes 1.2
 - * http://creativetextboxes.com/
 - * Copyright 2011, Ivan Castellanos

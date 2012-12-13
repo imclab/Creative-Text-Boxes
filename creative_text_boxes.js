@@ -6,6 +6,8 @@
  * Date: Thu Aug 16 00:00:00 2012 -0400
  */
 
+
+
 (function(){
 
 // [CH0] indexOf but using regex; it also returns length among other things.
@@ -68,7 +70,7 @@ window.CreativeTextBox = function(options){
 		previousWhitespaceUsed = 0, 	//	[LIKE CACHE] Use the last whitespace used to start from there and not from beginning of text
 		previousLineModificated = 0, 	//	[LIKE CACHE] Use the last line modificated to start from there and not from beginning of text
 		pixelDistance = options.pixelDistance || 40,
-		HTMLlocator = '<span id="HTMLlocator" style="position:absolute;" >.</span>',
+		HTMLlocator = '<span id="HTMLlocator" style="position:absolute;background:red" >.</span>',
 		lineOffset = options.line || 0;
 		
 	options.leftSizes = options.leftSizes || [];
@@ -144,8 +146,7 @@ window.CreativeTextBox = function(options){
 		/*[CH10] 	Traverse all the whitespaces using a dummy div (#HTMLlocator) to detect line breaks 
 					and put the span(s) that create the offset if it is the line required.				
 		 */
-		while(i<whitespaces_positions.length){
-			
+		while(i<whitespaces_positions.length){			
 			
 			container.innerHTML = 	html.substring(0,whitespaces_positions[i]) 
 									+ HTMLlocator 
@@ -173,13 +174,20 @@ window.CreativeTextBox = function(options){
 					
 					
 					var start_from_end = whitespaces_positions[i],
-						parentOffset = containerPosition=="relative" ? options.text.offsetTop : 0,
+						parentOffset = containerPosition === "relative" || containerPosition === "static" ? options.text.offsetTop : 0,						
 						widthIndex = ((offsetTop-parentOffset)  /pixelDistance)-lineOffset,
 						roundedDown = Math.floor(widthIndex),
 						decimals = widthIndex - roundedDown,
 						otherSide = sizes == options.rightSizes ? options.leftSizes : options.rightSizes,
 						realWidth = proportionalAverage(sizes[roundedDown],sizes[roundedDown+1],decimals),
 						realWidthOtherSide = proportionalAverage(otherSide[roundedDown],otherSide[roundedDown+1],decimals);
+
+						// console.log( widthIndex, offsetTop, parentOffset, pixelDistance, -lineOffset );
+						// console.log(containerPosition);
+
+						// if(widthIndex<1.58){
+						// 	alert("look at it "+ offsetTop )
+						// }
 					
 					
 					/*[CH8] If the pixel distance is way too big compared to the line-height it requires 
@@ -195,6 +203,8 @@ window.CreativeTextBox = function(options){
 					// [CH8]
 					
 					var span = '<span style="float:'+side+'; display:block; min-height:1px; background:transparent;clear:'+side+'; width:'+realWidth+'px;"></span>';
+
+
 					if(otherSide.length !== 0 && realWidthOtherSide){
 						var oth = span.replace(/width:.*px/,"width:"+realWidthOtherSide+"px");
 						span += side=="left" ? 
@@ -250,3 +260,4 @@ window.CreativeTextBox = function(options){
 
 
 })();
+
